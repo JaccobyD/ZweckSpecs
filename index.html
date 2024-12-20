@@ -12,70 +12,42 @@
     <style>
         body {
             margin: 20px;
-            transform: scale(3.5);
+            transform: scale(4.0);
             transform-origin: 0 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
         }
         header, footer {
-            padding: 15px;
+            padding: 20px;
             background-color: #C0C0C0;
             border: 2px solid #000;
             margin-bottom: 30px;
             text-align: center;
         }
         main {
-            padding: 20px;
+            padding: 30px;
             background-color: #FFF;
             border: 2px solid #000;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 50px;
         }
         button {
             margin-top: 10px;
             cursor: pointer;
         }
-        #surpriseText {
-            margin-top: 10px;
-            color: #0000FF;
-        }
         .hidden {
             display: none;
         }
-        .download-link {
-            display: block;
-            margin-top: 30px;
+        #ratingInput {
+            margin-top: 20px;
+        }
+        #yayLink {
+            display: none;
+            margin-top: 10px;
             color: #0000FF;
             text-decoration: underline;
-            cursor: pointer;
-        }
-        .ad-banner {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #FFD700;
-            border: 2px solid #000;
-            text-align: center;
-        }
-        .ad-banner img {
-            width: 100px;
-            margin: 10px 0;
-        }
-        #productCarousel {
-            margin: 20px 0;
-            display: flex;
-            overflow-x: scroll;
-            border: 1px solid #000;
-            padding: 15px;
-        }
-        .carousel-item {
-            flex: none;
-            margin-right: 20px;
-            width: 200px;
-            height: 150px;
-            background-color: #DDD;
-            border: 1px solid #000;
-            text-align: center;
-            line-height: 150px;
-        }
-        .translate-container {
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -88,88 +60,56 @@
     </header>
 
     <main>
-        <h2>Welcome to Zweck Specs!</h2>
-        <p>Explore our innovative products and join our community of tech enthusiasts.</p>
-
-        <!-- Interactive Button -->
-        <button id="toggleButton" class="animate__animated">Click me for a surprise!</button>
-        <p id="surpriseText" class="hidden">Surprise! Zweck Specs will change your world.</p>
-
-        <!-- Ad Banners -->
-        <div class="ad-banner animate__animated animate__bounceIn">
-            <h3>Ad 1: ZweckOS</h3>
-            <p>The Future of Operating Systems. Sleek, fast, and built for you.</p>
-            <img src="https://via.placeholder.com/100" alt="ZweckOS">
-            <button id="learnMoreButton1">Learn More</button>
-        </div>
-
-        <div class="ad-banner animate__animated animate__zoomIn">
-            <h3>Ad 2: Zweck# Programming Language</h3>
-            <p>Experience blazing-fast development with Zweck#.</p>
-            <img src="https://via.placeholder.com/100" alt="Zweck#">
-            <button id="learnMoreButton2">Discover Zweck#</button>
-        </div>
-
-        <div class="ad-banner animate__animated animate__fadeIn">
-            <h3>Ad 3: Help Mr. Dude Game</h3>
-            <p>Join the thrilling adventures of Mr. Dude. Available now!</p>
-            <img src="https://via.placeholder.com/100" alt="Help Mr. Dude">
-            <button id="learnMoreButton3">Play Now</button>
-        </div>
-
-        <!-- Product Carousel -->
-        <div id="productCarousel">
-            <div class="carousel-item">Product 1</div>
-            <div class="carousel-item">Product 2</div>
-            <div class="carousel-item">Product 3</div>
-            <div class="carousel-item">Product 4</div>
-        </div>
-
-        <!-- Download Button -->
-        <a id="downloadLink" class="download-link" download="zweck_specs.html">Download this page's HTML code</a>
+        <section class="section">
+            <h2>Rate Our Website</h2>
+            <p>We value your feedback! Please rate us by typing "good" or "bad" below:</p>
+            <input type="text" id="ratingInput" placeholder="Enter your feedback..." />
+            <button id="submitRating">Submit</button>
+            <p id="ratingResponse" class="hidden"></p>
+            <a id="yayLink" download="yay.txt">Click to download your reward!</a>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Zweck Specifications GmbH. All Rights Reserved.</p>
-        <p>Visit our YouTube channel: <a href="https://www.youtube.com/@XxJuniorYTxX" target="_blank">XxJuniorYTxX</a></p>
     </footer>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Jumpscare Audio -->
+    <audio id="jumpscareAudio" src="jumpscare.mp3" preload="auto"></audio>
+
+    <!-- JavaScript -->
     <script>
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
         }
 
-        $(document).ready(function() {
-            // Surprise Button Animation
-            $('#toggleButton').on('click', function() {
-                const $surpriseText = $('#surpriseText');
-                $surpriseText.toggleClass('hidden');
-                if (!$surpriseText.hasClass('hidden')) {
-                    gsap.fromTo($surpriseText, { opacity: 0 }, { opacity: 1, duration: 1 });
-                }
-            });
+        // Rating System Logic
+        document.getElementById('submitRating').addEventListener('click', () => {
+            const ratingInput = document.getElementById('ratingInput').value.trim().toLowerCase();
+            const responseElement = document.getElementById('ratingResponse');
+            const yayLink = document.getElementById('yayLink');
+            const jumpscareAudio = document.getElementById('jumpscareAudio');
 
-            // Download HTML Code
-            const htmlContent = $('html').prop('outerHTML');
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            $('#downloadLink').attr('href', url);
-
-            // Learn More Button
-            $('#learnMoreButton1').on('click', function() {
-                alert('Learn more about ZweckOS at our official site!');
-            });
-
-            $('#learnMoreButton2').on('click', function() {
-                alert('Zweck# is revolutionizing programming. Check it out!');
-            });
-
-            $('#learnMoreButton3').on('click', function() {
-                alert('Start your adventure with Mr. Dude today!');
-            });
+            if (ratingInput === 'good') {
+                responseElement.textContent = "Thank you for your kind words!";
+                responseElement.classList.remove('hidden');
+                jumpscareAudio.pause();
+                yayLink.style.display = 'inline-block';
+                // Create yay.txt file content
+                const fileContent = new Blob(["Yay! You loved it!"], { type: "text/plain" });
+                yayLink.href = URL.createObjectURL(fileContent);
+            } else if (ratingInput === 'bad') {
+                responseElement.textContent = "Oh no! Here's a spooky surprise...";
+                responseElement.classList.remove('hidden');
+                yayLink.style.display = 'none';
+                jumpscareAudio.currentTime = 0;
+                jumpscareAudio.play();
+            } else {
+                responseElement.textContent = "Please type 'good' or 'bad'!";
+                responseElement.classList.remove('hidden');
+                yayLink.style.display = 'none';
+                jumpscareAudio.pause();
+            }
         });
     </script>
 </body>
