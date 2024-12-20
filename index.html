@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zweck Specifications GmbH</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/98.css/0.1.0/98.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         body {
             margin: 20px;
+            transform: scale(3);
+            transform-origin: 0 0;
         }
         header, footer {
             padding: 10px;
@@ -30,19 +33,40 @@
         .hidden {
             display: none;
         }
+        .download-link {
+            display: block;
+            margin-top: 20px;
+            color: #0000FF;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .ad-banner {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #FFD700;
+            border: 2px solid #000;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Zweck Specifications GmbH</h1>
-        <p>Your Partner in Gyatt Cheek Technology Solutions</p>
+        <p>Your Partner in Cutting-Edge Technology Solutions</p>
     </header>
 
     <main>
         <h2>Welcome to Zweck Specs!</h2>
-        <p>Explore our innovative cheeks and join our community of tech enthusiasts. (You may get a GF!)</p>
-        <button id="toggleButton">Click me for a surprise!</button>
+        <p>Explore our innovative products and join our community of tech enthusiasts.</p>
+        <button id="toggleButton" class="animate__animated">Click me for a surprise!</button>
         <p id="surpriseText" class="hidden">Surprise! Zweck Specs will change your world.</p>
+        <a id="downloadLink" class="download-link" download="zweck_specs.html">Download this page's HTML code</a>
+
+        <!-- Ad Banner -->
+        <div class="ad-banner animate__animated animate__bounceIn">
+            <p>Check out our latest product: <strong>ZweckOS</strong> - The future of operating systems!</p>
+            <button id="learnMoreButton">Learn More</button>
+        </div>
     </main>
 
     <footer>
@@ -50,10 +74,26 @@
         <p>Visit our YouTube channel: <a href="https://www.youtube.com/@XxJuniorYTxX" target="_blank">XxJuniorYTxX</a></p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
-        document.getElementById("toggleButton").addEventListener("click", function() {
-            const surpriseText = document.getElementById("surpriseText");
-            surpriseText.classList.toggle("hidden");
+        $(document).ready(function() {
+            $('#toggleButton').on('click', function() {
+                const $surpriseText = $('#surpriseText');
+                $surpriseText.toggleClass('hidden');
+                if (!$surpriseText.hasClass('hidden')) {
+                    gsap.fromTo($surpriseText, { opacity: 0 }, { opacity: 1, duration: 1 });
+                }
+            });
+
+            const htmlContent = $('html').prop('outerHTML');
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            $('#downloadLink').attr('href', url);
+
+            $('#learnMoreButton').on('click', function() {
+                alert('Stay tuned! More info about ZweckOS is coming soon.');
+            });
         });
     </script>
 </body>
