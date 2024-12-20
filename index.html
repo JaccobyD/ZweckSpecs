@@ -3,28 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zweck Specs</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Zweck Specifications GmbH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/98.css/0.1.0/98.min.css">
+    <style>
+        body {
+            margin: 20px;
+        }
+        header, footer {
+            padding: 10px;
+            background-color: #C0C0C0;
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        main {
+            padding: 10px;
+            background-color: #FFF;
+            border: 2px solid #000;
+        }
+        button {
+            margin-top: 10px;
+        }
+        #surpriseText {
+            margin-top: 10px;
+            color: #0000FF;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Zweck Specs</h1>
-        <p class="subtitle">Zweck Specs</p>
+        <h1>Zweck Specifications GmbH</h1>
+        <p>Your Partner in Cutting-Edge Technology Solutions</p>
     </header>
 
     <main>
-        <section class="content">
-            <h2>Welcome to the Zweck Specs Website!</h2>
-            <p>This is the place where you can explore the exciting and minimalistic world of Zweck Specs.</p>
-            <button id="toggleButton">Click me for a surprise!</button>
-            <p id="surpriseText" class="hidden">Surprise! Zweck Specs will change your world.</p>
-        </section>
+        <h2>Welcome to Zweck Specs!</h2>
+        <p>Explore our innovative products and join our community of tech enthusiasts.</p>
+        <button id="toggleButton">Click me for a surprise!</button>
+        <p id="surpriseText" class="hidden">Surprise! Zweck Specs will change your world.</p>
     </main>
 
     <footer>
-        <p>&copy; 2024 Zweck Specs. Absolutely no Rights Reserved.</p>
+        <p>&copy; 2024 Zweck Specifications GmbH. All Rights Reserved.</p>
+        <p>Visit our YouTube channel: <a href="https://www.youtube.com/@XxJuniorYTxX" target="_blank">XxJuniorYTxX</a></p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            const surpriseText = document.getElementById("surpriseText");
+            surpriseText.classList.toggle("hidden");
+        });
+    </script>
 </body>
 </html>
